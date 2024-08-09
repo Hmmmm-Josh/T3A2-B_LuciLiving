@@ -29,3 +29,23 @@ app.post('/posts', async (req, res) => {
 app.listen(5000, () => {
   console.log("Server is running on port '5000'");
 });
+
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = new User({ username, password: hashedPassword });
+  await user.save();
+  res.sendStatus(201);
+});
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+  if (user && await bcrypt.compare(password, user.password)) {
+      const token = jwt.sign({ username: user.username }, 'SECRET_KEY');
+      res.json({ token });
+  } else {
+      res.sendStatus(401);
+  }
+});
+
