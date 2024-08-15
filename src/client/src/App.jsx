@@ -22,8 +22,10 @@ export default function App() {
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/projects' element={<Projects />} />
+
         </Routes>
         <Footer />
+        
       </BrowserRouter>
     </div>
   )
