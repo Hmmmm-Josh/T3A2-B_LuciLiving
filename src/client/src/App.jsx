@@ -22,7 +22,6 @@ export default function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/posts' element={<Posts />} />
           <Route path='/create-post' element={<CreatePost />} />
-
         </Routes>
         <Footer />
         
